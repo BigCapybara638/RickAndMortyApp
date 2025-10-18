@@ -30,7 +30,7 @@ class HomeViewModel : ViewModel() {
 
     private suspend fun loadCharactersList() {
         try {
-            val characters = characterRepository.getCharacterList(20)
+            val characters = characterRepository.getCharacterList(40)
             _characters.value = characters // Обновляем StateFlow
             println("✅ Загружено ${characters.size} героев")
         } catch (e: Exception) {

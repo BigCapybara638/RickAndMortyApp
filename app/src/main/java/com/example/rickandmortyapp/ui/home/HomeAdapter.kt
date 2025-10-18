@@ -13,6 +13,8 @@ import com.example.rickandmortyapp.databinding.ItemCharacterBinding
 
 class HomeAdapter : ListAdapter<CharacterItem, HomeAdapter.HomeViewHolder>(DIFF_CALLBACK) {
 
+    var onItemClick: ((CharacterItem) -> Unit)? = null
+
     inner class HomeViewHolder(private val binding: ItemCharacterBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -20,6 +22,11 @@ class HomeAdapter : ListAdapter<CharacterItem, HomeAdapter.HomeViewHolder>(DIFF_
             binding.nameCharacter.text = character.name
             binding.sexCharacter.text = character.gender
             binding.typeCharacter.text = character.species
+            binding.statusCharacter.text = character.status
+
+            binding.root.setOnClickListener {
+                onItemClick?.invoke(character)
+            }
 
             // Загрузка изображения - используем imageUrl
             character.imageUrl.let { imageUrl ->

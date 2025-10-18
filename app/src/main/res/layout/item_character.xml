@@ -11,10 +11,39 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageCharacter"
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="190dp" />
+            android:layout_height="190dp">
+
+            <!-- Изображение на заднем плане -->
+            <ImageView
+                android:id="@+id/imageCharacter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"/>
+
+            <!-- Ваш LinearLayout поверх изображения -->
+            <LinearLayout
+                android:layout_width="90dp"
+                android:layout_height="30dp"
+                android:background="@drawable/custom_edittext_shape"
+                android:layout_gravity="bottom|end"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/statusCharacter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+        </FrameLayout>
 
         <TextView
             android:id="@+id/nameCharacter"

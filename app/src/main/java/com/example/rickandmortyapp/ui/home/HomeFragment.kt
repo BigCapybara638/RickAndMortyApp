@@ -2,14 +2,17 @@ package com.example.rickandmortyapp.ui.home
 
 import android.graphics.Rect
 import android.os.Bundle
+import com.example.rickandmortyapp.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.rickandmortyapp.api.CharacterItem
 import com.example.rickandmortyapp.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
 
@@ -34,6 +37,7 @@ class HomeFragment : Fragment() {
         setupRecyclerView()
         observeViewModel()
         viewModel.loadData()
+
     }
 
     private fun setupRecyclerView() {
@@ -50,6 +54,14 @@ class HomeFragment : Fragment() {
             val spacing = (16 * resources.displayMetrics.density).toInt()
             addItemDecoration(SpacesItemDecoration(spacing))
         }
+
+        characterAdapter.onItemClick = { character ->
+            openCharacterDetail(character)
+        }
+    }
+
+    private fun openCharacterDetail(character: CharacterItem) {
+        findNavController().navigate(R.id.action_first_to_second)
     }
 
     private fun observeViewModel() {
