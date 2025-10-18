@@ -1,5 +1,6 @@
 package com.example.rickandmortyapp.ui.home
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import com.example.rickandmortyapp.R
 import android.view.ViewGroup
@@ -23,6 +24,20 @@ class HomeAdapter : ListAdapter<CharacterItem, HomeAdapter.HomeViewHolder>(DIFF_
             binding.sexCharacter.text = character.gender
             binding.typeCharacter.text = character.species
             binding.statusCharacter.text = character.status
+
+            if (character.status == "Alive") {
+                binding.imageStatusCharacter.setColorFilter(Color.GREEN)
+            }
+
+            if (character.status == "Dead") {
+                binding.imageStatusCharacter.setColorFilter(Color.RED)
+            }
+
+            if (character.status == "unknown") {
+                binding.imageStatusCharacter.setColorFilter(Color.GRAY)
+            }
+
+
 
             binding.root.setOnClickListener {
                 onItemClick?.invoke(character)

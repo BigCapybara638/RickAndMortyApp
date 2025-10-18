@@ -50,7 +50,7 @@ class HomeFragment : Fragment() {
                 false
             )
 
-            // ✅ ПРАВИЛЬНО: вызываем addItemDecoration на RecyclerView
+            // вызываем addItemDecoration на RecyclerView
             val spacing = (16 * resources.displayMetrics.density).toInt()
             addItemDecoration(SpacesItemDecoration(spacing))
         }
@@ -61,7 +61,14 @@ class HomeFragment : Fragment() {
     }
 
     private fun openCharacterDetail(character: CharacterItem) {
-        findNavController().navigate(R.id.action_first_to_second)
+        val bundle = Bundle().apply {
+            putParcelable("character", character)
+        }
+
+        findNavController().navigate(
+            R.id.action_first_to_second,
+            bundle
+            )
     }
 
     private fun observeViewModel() {

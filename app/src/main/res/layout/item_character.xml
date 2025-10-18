@@ -29,13 +29,21 @@
                 android:layout_height="30dp"
                 android:background="@drawable/custom_edittext_shape"
                 android:layout_gravity="bottom|end"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:orientation="horizontal"
+                android:gravity="center|start">
+
+                <ImageView
+                    android:id="@+id/imageStatusCharacter"
+                    android:layout_width="8dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:src="@drawable/ic_circle"/>
 
                 <TextView
                     android:id="@+id/statusCharacter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp"
                     android:textStyle="bold" />
