@@ -1,5 +1,6 @@
-package com.example.rickandmortyapp.api
+package com.example.rickandmortyapp.data.network
 
+import com.example.rickandmortyapp.data.network.RickApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -15,6 +16,6 @@ object RetrofitClient {
 
     // API сервис
     val rickApiService: RickApiService by lazy {
-        com.example.rickandmortyapp.api.RetrofitClient.characterRetrofit.create(RickApiService::class.java)
+        characterRetrofit.create(RickApiService::class.java)
     }
 }

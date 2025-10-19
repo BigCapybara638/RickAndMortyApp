@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/navigation_details"
-        android:name="com.example.rickandmortyapp.ui.home.DetailsFragment"
+        android:name="com.example.rickandmortyapp.ui.details.DetailsFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_details" />
 

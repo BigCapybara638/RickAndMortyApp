@@ -1,15 +1,14 @@
-package com.example.rickandmortyapp.ui.home
+package com.example.rickandmortyapp.ui.details
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.rickandmortyapp.R
-import com.example.rickandmortyapp.api.CharacterItem
+import com.example.rickandmortyapp.data.network.CharacterItem
 import com.example.rickandmortyapp.databinding.FragmentDetailsBinding
 
 class DetailsFragment : Fragment() {
@@ -37,7 +36,7 @@ class DetailsFragment : Fragment() {
         character?.imageUrl.let { imageUrl ->
             Glide.with(binding.root.context)
                 .load(imageUrl)
-                .placeholder(R.drawable.ic_notifications_black_24dp)
+                .placeholder(R.drawable.ic_person)
                 .into(binding.imageCharacter)
         }
 

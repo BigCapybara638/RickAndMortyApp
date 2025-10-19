@@ -1,13 +1,17 @@
-package com.example.rickandmortyapp.api
+package com.example.rickandmortyapp.data
 
 import android.content.Context
+import com.example.rickandmortyapp.data.local.AppDatabase
+import com.example.rickandmortyapp.data.local.CharacterEntity
+import com.example.rickandmortyapp.data.network.CharacterItem
+import com.example.rickandmortyapp.data.network.RetrofitClient
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlin.collections.emptyList
 
 class RickRepository(private val context: Context) {
     private val apiService = RetrofitClient.rickApiService
-    private val database = AppDatabase.getInstance(context)
+    private val database = AppDatabase.Companion.getInstance(context)
     private val characterDao = database.characterDao()
 
     suspend fun getCharacterList(limit: Int = 50): List<CharacterItem> {

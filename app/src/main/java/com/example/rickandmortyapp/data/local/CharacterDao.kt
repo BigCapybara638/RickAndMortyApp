@@ -1,6 +1,10 @@
-package com.example.rickandmortyapp.api
+package com.example.rickandmortyapp.data.local
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.example.rickandmortyapp.data.local.CharacterEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -17,7 +21,7 @@ interface CharacterDao {
     @Query("SELECT * FROM characters WHERE id = :characterId")
     suspend fun getCharacterById(characterId: Long): CharacterEntity?
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insertCharacters(characters: List<CharacterEntity>)
 
     @Query("DELETE FROM characters")

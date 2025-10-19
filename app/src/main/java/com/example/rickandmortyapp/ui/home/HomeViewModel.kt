@@ -2,13 +2,11 @@ package com.example.rickandmortyapp.ui.home
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.rickandmortyapp.api.CharacterItem
-import com.example.rickandmortyapp.api.RickRepository
+import com.example.rickandmortyapp.data.network.CharacterItem
+import com.example.rickandmortyapp.data.RickRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -1,4 +1,4 @@
-package com.example.rickandmortyapp.api
+package com.example.rickandmortyapp.data.network
 
 import retrofit2.http.GET
 

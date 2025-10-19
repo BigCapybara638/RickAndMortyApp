@@ -1,6 +1,5 @@
 package com.example.rickandmortyapp.ui.home
 
-import android.app.Application
 import android.graphics.Rect
 import android.os.Bundle
 import com.example.rickandmortyapp.R
@@ -9,13 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rickandmortyapp.api.CharacterItem
+import com.example.rickandmortyapp.data.network.CharacterItem
 import com.example.rickandmortyapp.databinding.FragmentHomeBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch

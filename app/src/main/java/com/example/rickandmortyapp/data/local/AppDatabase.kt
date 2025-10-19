@@ -1,9 +1,10 @@
-package com.example.rickandmortyapp.api
+package com.example.rickandmortyapp.data.local
 
+import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import android.content.Context
+import com.example.rickandmortyapp.data.local.CharacterEntity
 
 @Database(
     entities = [CharacterEntity::class],

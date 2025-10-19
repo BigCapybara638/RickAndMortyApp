@@ -4,12 +4,11 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import com.example.rickandmortyapp.R
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.rickandmortyapp.api.CharacterItem
+import com.example.rickandmortyapp.data.network.CharacterItem
 import com.example.rickandmortyapp.databinding.ItemCharacterBinding
 
 class HomeAdapter : ListAdapter<CharacterItem, HomeAdapter.HomeViewHolder>(DIFF_CALLBACK) {
@@ -47,7 +46,7 @@ class HomeAdapter : ListAdapter<CharacterItem, HomeAdapter.HomeViewHolder>(DIFF_
             character.imageUrl.let { imageUrl ->
                 Glide.with(binding.root.context)
                     .load(imageUrl)
-                    .placeholder(R.drawable.ic_notifications_black_24dp)
+                    .placeholder(R.drawable.ic_person)
                     .into(binding.imageCharacter)
             }
 
