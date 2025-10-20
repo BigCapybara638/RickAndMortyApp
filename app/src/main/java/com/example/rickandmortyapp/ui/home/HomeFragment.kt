@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.rickandmortyapp.FilterBottomSheetDialog
 import com.example.rickandmortyapp.data.network.CharacterItem
 import com.example.rickandmortyapp.databinding.FragmentHomeBinding
 import com.google.android.material.snackbar.Snackbar
@@ -27,6 +28,8 @@ class HomeFragment : Fragment() {
         HomeViewModelFactory(requireActivity().application)
     }
 
+    private var isFirstDataLoad = true
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,6 +44,7 @@ class HomeFragment : Fragment() {
 
         setupRecyclerView()
         observeViewModel()
+        setupFilterButton()
         setupSwipeRefresh()
 
         // Данные уже загружаются в init ViewModel
@@ -55,6 +59,8 @@ class HomeFragment : Fragment() {
                 GridLayoutManager.VERTICAL,
                 false
             )
+
+            setHasFixedSize(true)
             val spacing = (16 * resources.displayMetrics.density).toInt()
             addItemDecoration(SpacesItemDecoration(spacing))
         }
@@ -63,6 +69,30 @@ class HomeFragment : Fragment() {
             openCharacterDetail(character)
         }
     }
+
+    private fun setupFilterButton() {
+        // Добавьте кнопку фильтра в ваш layout (в toolbar или floating action button)
+        binding.filterButton.setOnClickListener {
+            showFilterDialog()
+        }
+    }
+
+    private fun showFilterDialog() {
+        val filterDialog = FilterBottomSheetDialog()
+        filterDialog.setCurrentFilters(
+            viewModel.currentStatusFilter.value,
+            viewModel.currentGenderFilter.value,
+            viewModel.currentSpeciesFilter.value
+        )
+        filterDialog.setOnFiltersAppliedListener { status, gender, species ->
+            viewModel.setStatusFilter(status)
+            viewModel.setGenderFilter(gender)
+            viewModel.setSpeciesFilter(species)
+        }
+        filterDialog.show(parentFragmentManager, "FilterBottomSheet")
+    }
+
+
 
     private fun setupSwipeRefresh() {
         binding.swipeRefreshLayout.setOnRefreshListener {
@@ -76,9 +106,24 @@ class HomeFragment : Fragment() {
                 characterAdapter.submitList(characters) {
                     // Этот callback вызывается после обновления списка
                     if (characters.isNotEmpty()) {
+
+                        if (isFirstDataLoad) {
+                            binding.characterRecycle.post {
+                                binding.characterRecycle.scrollToPosition(0)
+                            }
+                            isFirstDataLoad = false
+                        }
+
                         // Прокручиваем к началу только при первой загрузке
                         binding.characterRecycle.scrollToPosition(0)
+
+                        binding.swipeRefreshLayout.isRefreshing = false
+
+                        // Показываем количество результатов
+                        updateResultsCount(characters.size)
+
                     }
+
                 }
                 binding.swipeRefreshLayout.isRefreshing = false
                 println("🔄 Обновление адаптера с ${characters.size} элементами")
@@ -102,6 +147,12 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+    private fun updateResultsCount(count: Int) {
+        // Можно показать количество результатов в Snackbar или TextView
+        binding.resultsCountText.text = "Найдено: $count"
+    }
+
 
     private fun openCharacterDetail(character: CharacterItem) {
         val bundle = Bundle().apply {
